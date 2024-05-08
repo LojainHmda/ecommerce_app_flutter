@@ -1,7 +1,7 @@
-import 'package:ecommerce_app/view_models/favorite_cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/product_item_model.dart';
+import '../../view_models/favorite_cubit/favorite_cubit.dart';
 
 class ProdectItem extends StatelessWidget {
   final ProductItemModel productItem;

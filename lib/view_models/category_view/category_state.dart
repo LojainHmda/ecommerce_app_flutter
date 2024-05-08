@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/models/product_item_model.dart';
+
+import '../../models/product_item_model.dart';
 
 abstract class CategoryState {}
 

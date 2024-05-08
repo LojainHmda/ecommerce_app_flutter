@@ -1,12 +1,13 @@
-import 'package:ecommerce_app/utils/app_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../utils/app_colors.dart';
+
 class MainButton extends StatelessWidget {
   const MainButton(
       {super.key,
-      required this.height,
+      this.height=40,
       this.child,
       this.bgColor = AppColors.Primary,
       this.frColor = AppColors.white,

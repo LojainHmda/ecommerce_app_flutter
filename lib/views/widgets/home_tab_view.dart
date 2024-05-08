@@ -1,14 +1,13 @@
-import 'package:ecommerce_app/models/product_item_model.dart';
-import 'package:ecommerce_app/utils/route/app_routes.dart';
-import 'package:ecommerce_app/view_models/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../models/product_item_model.dart';
+import '../../utils/route/app_routes.dart';
+import '../../view_models/home_cubit/home_cubit.dart';
 import 'custom_carousel.dart';
 import 'product_item.dart';
 
 class HomeTabView extends StatelessWidget {
-  const HomeTabView({super.key});
+  const HomeTabView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,33 +45,35 @@ class HomeTabView extends StatelessWidget {
                         "New Arrivals",
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
+                            .headline6!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       TextButton(
-                          onPressed: () {}, child: const Text("See more")),
+                        onPressed: () {}, 
+                        child: const Text("See more"),
+                      ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 24),
                   GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: dummyProducts.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 18,
-                              mainAxisSpacing: 18),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                            onTap: () => Navigator.of(context,rootNavigator: true).pushNamed(
-                                AppRoutes.productDetails,
-                                arguments: dummyProducts[index]),
-                            child:
-                                ProdectItem(productItem: dummyProducts[index]));
-                      })
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: products.length,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 18,
+                      mainAxisSpacing: 18,
+                    ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(
+                          AppRoutes.productDetails,
+                          arguments: products[index],
+                        ),
+                        child: ProdectItem(productItem: products[index]),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

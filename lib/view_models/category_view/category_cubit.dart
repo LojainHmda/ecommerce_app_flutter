@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/models/product_item_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../models/product_item_model.dart';
 import 'category_state.dart';
 
 

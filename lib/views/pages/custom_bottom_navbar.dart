@@ -1,14 +1,18 @@
-import 'package:ecommerce_app/utils/app_assests.dart';
-import 'package:ecommerce_app/utils/app_colors.dart';
-import 'package:ecommerce_app/utils/route/app_routes.dart';
-import 'package:ecommerce_app/view_models/favorite_cubit/favorite_cubit.dart';
-import 'package:ecommerce_app/views/pages/cart_page.dart';
-import 'package:ecommerce_app/views/pages/favorite_page.dart';
-import 'package:ecommerce_app/views/pages/home_page.dart';
+import 'package:ecommerce_appQ/servicse/firestore_servicses.dart';
+import 'package:ecommerce_appQ/utils/api_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../models/product_item_model.dart';
+import '../../utils/app_assests.dart';
+import '../../utils/app_colors.dart';
+import '../../utils/route/app_routes.dart';
+import '../../view_models/cart_cubit/cart_cubit.dart';
+import '../../view_models/favorite_cubit/favorite_cubit.dart';
+import 'cart_page.dart';
+import 'favorite_page.dart';
+import 'home_page.dart';
 import 'profile_page.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
@@ -20,6 +24,8 @@ class CustomBottomNavBar extends StatefulWidget {
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   late PersistentTabController _controller;
+  final FirestoreService _firestoreService = FirestoreService.instance;
+
   int _currntIndex = 0;
   @override
   void initState() {
@@ -30,7 +36,15 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         _currntIndex = _controller.index;
       });
     });
+    //  sendDummyData();
   }
+
+  // Future<void> sendDummyData() async {
+  //   dummyProducts.forEach((product) async {
+  //     await _firestoreService.setData(
+  //         path: ApiPaths.product(product.id), data: product.toMap());
+  //   });
+  // }
 
   @override
   dispose() {
@@ -45,7 +59,14 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         create: (context) => FavoriteCubit(),
         child: FavoritePage(),
       ),
-      const CartPage(),
+        BlocProvider(
+        create: (context) {
+          final cubit = CartCubit();
+          cubit.getCartItems();
+          return cubit;
+        },
+        child: const CartPage(),
+      ),
       const ProfilePage(),
     ];
   }

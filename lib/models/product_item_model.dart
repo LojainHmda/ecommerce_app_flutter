@@ -1,4 +1,17 @@
-enum ProductSize { S, M, L, XL, XXL }
+enum ProductSize { S, M, L, XL, XXL ;
+static ProductSize fromString(String size){
+if (size.toUpperCase() == ProductSize.S.name) {
+      return ProductSize.S;
+    } else if (size.toUpperCase() == ProductSize.M.name) {
+      return ProductSize.M;
+    } else if (size.toUpperCase() == ProductSize.L.name) {
+      return ProductSize.L;
+    } else if (size.toUpperCase() == ProductSize.XL.name) {
+      return ProductSize.XL;
+    } else {
+      return ProductSize.XXL;
+    }
+}}
 
 class ProductItemModel {
   final String id;
@@ -9,6 +22,7 @@ class ProductItemModel {
   final String description;
   final String category;
   final double averageRate;
+  
 
   ProductItemModel(
       {required this.id,
@@ -20,11 +34,41 @@ class ProductItemModel {
           "ndjsnvo ksjnvwjn bjnvajnvo vdnfvibnrva jn;aavnevna;v odnvjd jjk ijojndjsnvo ksjnvwjn bjnvajnvo vdnfvibnrva jn;aavnevna;v odnvjd jjk ijojndjsnvo ksjnvwjn bjnvajnvo vdnfvibnrva jn;aavnevna;v odnvjd jjk ijojndjsnvo ksjnvwjn bjnvajnvo vdnfvibnrva jn;aavnevna;v odnvjd jjk ijoj",
       required this.category,
       this.averageRate = 1});
+
+
+      
+Map<String, dynamic> toMap() {
+  final result = <String, dynamic>{};
+  result.addAll({'id': id});
+  result.addAll({'isFavorite': isFavorite});
+  result.addAll({'name': name});
+  result.addAll({'price': price});
+  result.addAll({'imgUrl': imgUrl});
+  result.addAll({'description': description});
+  result.addAll({'category': category});
+  result.addAll({'averageRate': averageRate});
+  return result;
 }
+
+factory ProductItemModel.fromMap(Map<String, dynamic> map,String documentId) {
+  return ProductItemModel(
+    id:documentId ,
+    isFavorite: map['isFavorite'] ?? false,
+    name: map['name'] ?? '',
+    price: (map['price'] as num?)?.toDouble() ?? 0.0,
+    imgUrl: map['imgUrl'] ?? '',
+    description: map['description'] ?? '',
+    category: map['category'] ?? '',
+    averageRate: (map['averageRate'] as num?)?.toDouble() ?? 0.0,
+  );
+}
+
+}
+
 
 List<ProductItemModel> dummyProducts = [
   ProductItemModel(
-    id: "1",
+    id: "QM8FuaGkFMq5SwfuzI6b",
     name: "Sport shoes",
     price: 120.00,
     imgUrl:
@@ -33,24 +77,17 @@ List<ProductItemModel> dummyProducts = [
   ),
   // Shoes
   ProductItemModel(
-    id: "2",
+    id: "9E38Ni4lDc9rzvh1hLIJ",
     name: "sport shoes",
     price: 180.00,
     imgUrl:
         "https://static.vecteezy.com/system/resources/previews/019/953/797/non_2x/shoes-isolated-on-transparent-background-free-png.png",
     category: "Shoes",
   ),
-  ProductItemModel(
-    id: "3",
-    name: "T-Shirt",
-    price: 19.99,
-    imgUrl:
-        "https://static.vecteezy.com/system/resources/previews/021/104/624/non_2x/isolated-blank-t-shirt-for-mock-up-free-png.png",
-    category: "Clothes",
-  ),
+  
   // Groceries
   ProductItemModel(
-    id: "4",
+    id: "m4S0wXR5LfTDyzOnbes",
     name: "Organic Grapes",
     price: 4.99,
     imgUrl:
@@ -59,7 +96,7 @@ List<ProductItemModel> dummyProducts = [
   ),
   // Smartphones
   ProductItemModel(
-    id: "5",
+    id: "0AP2xGKwa9stIiJ8tHPe",
     name: "iPhone 13 Pro",
     price: 999.99,
     imgUrl:
@@ -68,7 +105,7 @@ List<ProductItemModel> dummyProducts = [
   ),
   // Fruits
   ProductItemModel(
-    id: "6",
+    id: "Gooewn20ER7TfD4VECcp",
     name: "Organic Apples",
     price: 1.99,
     imgUrl:
@@ -77,7 +114,7 @@ List<ProductItemModel> dummyProducts = [
   ),
   // Clothes
   ProductItemModel(
-    id: "7",
+    id: "yfBE8JMrmcubBvpGn2l6",
     name: "Jeans",
     price: 29.99,
     imgUrl:
@@ -86,7 +123,7 @@ List<ProductItemModel> dummyProducts = [
   ),
   // Groceries
   ProductItemModel(
-    id: "8",
+    id: "mrnBl15kG4AIMHeazXl0",
     name: "Jacket",
     price: 6.99,
     imgUrl:
@@ -95,7 +132,7 @@ List<ProductItemModel> dummyProducts = [
   ),
   // Smartphones
   ProductItemModel(
-    id: "9",
+    id: "2OQ4Ms3bd82yr9qssG0Y",
     name: "Google Pixel 6 Pro",
     price: 899.99,
     imgUrl:
@@ -104,7 +141,7 @@ List<ProductItemModel> dummyProducts = [
   ),
   // Fruits
   ProductItemModel(
-    id: "10",
+    id: "0ELbRyuu30mEcxOTCq3K",
     name: "Organic Strawberries",
     price: 3.49,
     imgUrl:

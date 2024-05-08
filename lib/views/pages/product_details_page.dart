@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_app/models/product_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../models/product_item_model.dart';
 import '../../utils/app_colors.dart';
 import '../../view_models/product_details_view/product_details_cubit.dart';
 import '../widgets/counter_widget.dart';
@@ -240,6 +240,7 @@ class ProductDetailsPage extends StatelessWidget {
                                     current is AddedToCart ||
                                     current is AddToCartsError,
                                 listener: (context, state) {
+
                                   if (state is AddToCartsError) {
                                     showDialog(
                                       context: context,
@@ -249,7 +250,7 @@ class ProductDetailsPage extends StatelessWidget {
                                         actions: [TextButton(onPressed: ()=> Navigator.pop(context), child: const Text("OK"))],
                                       ),
                                     );
-                                  }
+                                  }                                //    print('${product.name}  }');
                                 },
                                 builder: (context, state) {
                                   if (state is AddingToCart) {

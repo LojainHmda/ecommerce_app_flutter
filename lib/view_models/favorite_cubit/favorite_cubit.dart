@@ -1,9 +1,9 @@
 
 
-// favorite_cubit.dart
-import 'package:ecommerce_app/models/product_item_model.dart';
-import 'package:ecommerce_app/view_models/favorite_cubit/favorite_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../models/product_item_model.dart';
+import 'favorite_state.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {
   List<ProductItemModel> favorites = [];

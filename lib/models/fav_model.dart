@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/models/product_item_model.dart';
+
+import 'product_item_model.dart';
 
 class FavModel {
   final String id;
