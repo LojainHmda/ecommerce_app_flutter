@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/product_item_model.dart';
 import '../../utils/app_colors.dart';
+import '../../view_models/favorite_cubit/favorite_cubit.dart';
 import '../../view_models/product_details_view/product_details_cubit.dart';
 import '../widgets/counter_widget.dart';
 
@@ -42,11 +43,33 @@ class ProductDetailsPage extends StatelessWidget {
               extendBodyBehindAppBar: true,
               appBar: AppBar(
                 backgroundColor: AppColors.transparent,
-                actions: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.favorite_border)),
-                ],
+                actions: [ BlocConsumer<FavoriteCubit, FavoriteState>(
+                    listener: (context, state) {
+                      if (state is AddToFavoritesError) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text("Alert"),
+                            content: const Text("Error occurred while adding to favorites"),
+                            actions: [TextButton(onPressed: ()=> Navigator.pop(context), child: const Text("OK"))],
+                          ),
+                        );
+                      } 
+                    },
+                    
+                    builder: (context, state) {
+                      final favoriteCubit = BlocProvider.of<FavoriteCubit>(context);
+                    
+                        return SizedBox(
+                          height: 50,
+                          child: IconButton(
+                            onPressed: () {
+                              product.isFavorite? favoriteCubit.removeFromFavorites(product):
+                              favoriteCubit.addToFavorites(product);
+                            },
+                            icon: product.isFavorite? Icon(Icons.favorite, color: Colors.red):Icon(Icons.favorite, color: Colors.black),
+                          )
+               ) ; } ) ],
               ),
               body: Stack(children: [
                 Container(

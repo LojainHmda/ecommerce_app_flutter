@@ -1,10 +1,7 @@
-import 'package:ecommerce_appQ/servicse/firestore_servicses.dart';
-import 'package:ecommerce_appQ/utils/api_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../../models/product_item_model.dart';
 import '../../utils/app_assests.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/route/app_routes.dart';
@@ -24,7 +21,6 @@ class CustomBottomNavBar extends StatefulWidget {
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   late PersistentTabController _controller;
-  final FirestoreService _firestoreService = FirestoreService.instance;
 
   int _currntIndex = 0;
   @override
@@ -55,10 +51,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      BlocProvider<FavoriteCubit>(
-        create: (context) => FavoriteCubit(),
-        child: FavoritePage(),
-      ),
+     BlocProvider(
+  create: (context) => FavoriteCubit(), 
+  child: FavoritePage(),
+),
+
         BlocProvider(
         create: (context) {
           final cubit = CartCubit();

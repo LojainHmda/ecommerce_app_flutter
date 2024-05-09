@@ -1,15 +1,39 @@
-
-
-import '../../models/product_item_model.dart';
+part of 'favorite_cubit.dart';
 
 abstract class FavoriteState {}
 
 class FavoriteInitial extends FavoriteState {}
 
-class FavoriteLoaded extends FavoriteState {
-  final List<ProductItemModel> favorites;
+class AddingToFavorites extends FavoriteState {}
 
-  FavoriteLoaded(this.favorites);
+class AddedToFavorites extends FavoriteState {}
+
+class AddToFavoritesError extends FavoriteState {
+  final String message;
+
+  AddToFavoritesError(this.message);
 }
 
-class FavoriteError extends FavoriteState {}
+class RemovingFromFavorites extends FavoriteState {}
+
+class RemovedFromFavorites extends FavoriteState {}
+
+class RemoveFromFavoritesError extends FavoriteState {
+  final String message;
+
+  RemoveFromFavoritesError(this.message);
+}
+
+class FavoritesLoading extends FavoriteState {}
+
+class FavoritesLoaded extends FavoriteState {
+  final List<ProductItemModel> favorites;
+
+  FavoritesLoaded({required this.favorites});
+}
+
+class FavoritesError extends FavoriteState {
+  final String message;
+
+  FavoritesError(this.message);
+}

@@ -57,9 +57,6 @@ class CartPage extends StatelessWidget {
                     height: 50,
                     child: MainButton(
                       onPressed: () {
-                        //   Navigator.of(context, rootNavigator: true).pushNamed(
-                        //   AppRoutes.payment,
-                        // );
                       },
                       child: const Text('Checkout'),
                     ),

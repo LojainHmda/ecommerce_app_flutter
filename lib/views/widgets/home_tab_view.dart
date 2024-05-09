@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/product_item_model.dart';
 import '../../utils/route/app_routes.dart';
+import '../../view_models/favorite_cubit/favorite_cubit.dart';
 import '../../view_models/home_cubit/home_cubit.dart';
 import 'custom_carousel.dart';
 import 'product_item.dart';
-
 class HomeTabView extends StatelessWidget {
   const HomeTabView({Key? key}) : super(key: key);
 
@@ -70,7 +70,10 @@ class HomeTabView extends StatelessWidget {
                           AppRoutes.productDetails,
                           arguments: products[index],
                         ),
-                        child: ProdectItem(productItem: products[index]),
+                        child: BlocProvider<FavoriteCubit>(
+                          create: (context) => FavoriteCubit(),
+                          child: ProdectItem(productItem: products[index]),
+                        ),
                       );
                     },
                   ),

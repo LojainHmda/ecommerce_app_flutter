@@ -17,33 +17,33 @@ class FirestoreService {
     await reference.delete();
   }
 
-Stream<List<T>> collectionStream<T>({
-  required String path,
-  T Function(Map<String, dynamic> data, String documentId)? builder,
-  Query Function(Query query)? queryBuilder,
-  int Function(T lhs, T rhs)? sort,
-}) {
-  Query query = firestore.collection(path);
+  Stream<List<T>> collectionStream<T>({
+    required String path,
+    T Function(Map<String, dynamic> data, String documentId)? builder,
+    Query Function(Query query)? queryBuilder,
+    int Function(T lhs, T rhs)? sort,
+  }) {
+    Query query = firestore.collection(path);
 
-  if (queryBuilder != null) {
-    query = queryBuilder(query);
-  }
-
-  final snapshots = query.snapshots();
-  return snapshots.map((snapshot) {
-    final result = snapshot.docs
-        .map((snapshot) =>
-            builder?.call(snapshot.data() as Map<String, dynamic>, snapshot.id))
-        .whereType<T>()
-        .toList();
-
-    if (sort != null) {
-      result.sort(sort);
+    if (queryBuilder != null) {
+      query = queryBuilder(query);
     }
 
-    return result;
-  });
-}
+    final snapshots = query.snapshots();
+    return snapshots.map((snapshot) {
+      final result = snapshot.docs
+          .map((snapshot) => builder?.call(
+              snapshot.data() as Map<String, dynamic>, snapshot.id))
+          .whereType<T>()
+          .toList();
+
+      if (sort != null) {
+        result.sort(sort);
+      }
+
+      return result;
+    });
+  }
 
   Stream<T> documentStream<T>({
     required String path,

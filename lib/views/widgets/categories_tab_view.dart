@@ -12,13 +12,13 @@ class CategoriesTabView extends StatelessWidget {
       child: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
           if (state is CategoryLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (state is CategoryLoaded) {
             return ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: state.products.length,
               itemBuilder: (context, index) {
                 final product = state.products[index];
@@ -33,7 +33,7 @@ class CategoriesTabView extends StatelessWidget {
               child: Text('Error: ${state.errorMessage}'),
             );
           } else {
-            return Center(
+            return const Center(
               child: Text('Unknown state'),
             );
           }

@@ -15,7 +15,7 @@ if (size.toUpperCase() == ProductSize.S.name) {
 
 class ProductItemModel {
   final String id;
-  final bool isFavorite;
+   bool isFavorite;
   final String name;
   final double price;
   final String imgUrl;

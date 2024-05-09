@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,17 +38,18 @@ class AppRouter {
       case AppRoutes.myOrders:
         return MaterialPageRoute(builder: (_) => const MyOrderPage());
 
-
-      case AppRoutes.favs:
-        return 
-  MaterialPageRoute(
-    builder: (context) => BlocProvider.value(
-      value: BlocProvider.of<FavoriteCubit>(context),
-      child: FavoritePage(),
+     case AppRoutes.favs:
+  return MaterialPageRoute(
+    builder: (_) => BlocProvider(
+      create: (context) {
+        final cubit = FavoriteCubit();
+        return cubit;
+      },
+      child:  FavoritePage(), 
     ),
-  
+    settings: settings,
+  );
 
-);
 
       default:
         return MaterialPageRoute(
